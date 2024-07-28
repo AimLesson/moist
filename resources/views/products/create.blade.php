@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Create Product</h1>
-    <form action="{{ route('products.store') }}" method="POST">
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -19,6 +19,10 @@
         <label for="stock">Stock:</label>
         <input type="number" id="stock" name="stock" required>
         <br>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" name="image" id="image">
+        </div>
         <button type="submit">Create</button>
     </form>
 </body>

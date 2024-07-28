@@ -8,6 +8,6 @@
     <p>{{ $product->description }}</p>
     <p>Price: {{ $product->price }}</p>
     <p>Stock: {{ $product->stock }}</p>
-    <a href="{{ route('products.index') }}">Back to Products</a>
+    <a href="{{ route('products.katalog') }}">Back to Products</a>
 </body>
 </html>

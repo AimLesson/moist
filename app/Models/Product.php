@@ -13,6 +13,6 @@ class Product extends Model
         'description',
         'price',
         'stock',
-        // Add any other fields you want to be mass assignable
+        'image',  // Add this line
     ];
 }
