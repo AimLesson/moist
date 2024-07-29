@@ -28,6 +28,13 @@ class OrderController extends Controller
         return view('orders.all', compact('orders'));
     }
 
+    public function laporan()
+    {
+        $orders = Order::with('orderItems.product')->get();
+
+        return view('orders.laporan', compact('orders'));
+    }
+
     public function create()
     {
         $cart = session('cart', []);
@@ -35,10 +42,14 @@ class OrderController extends Controller
         if (empty($cart)) {
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
-
         $totalPrice = array_sum(array_column($cart, 'total'));
 
-        return view('orders.create', compact('cart', 'totalPrice'));
+        $totalItems = array_sum(array_column($cart, 'quantity')); //mengambil data items
+        $discountPercentage = min(floor($totalItems / 5) * 5, 20); //menghitung total qty items yang masuk ke keranjang , tiap kelipatan 5 qty menambah 5% diskon dengan maksimal diskon 20%
+        $discountAmount = ($totalPrice * $discountPercentage) / 100;
+        $finalPrice = $totalPrice - $discountAmount;
+
+        return view('orders.create', compact('cart', 'finalPrice'));
     }
 
     public function store(Request $request)
@@ -49,9 +60,19 @@ class OrderController extends Controller
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
+        // Validate the request
+        $validated = $request->validate([
+            'alamat' => 'required|string|max:255',
+            'hp' => 'required|string|max:15',
+            'payment' => 'required|string|max:50',
+        ]);
+
         $order = new Order();
         $order->user_id = Auth::id(); // Set the authenticated user's ID
         $order->status = 'pending';
+        $order->alamat = $validated['alamat'];
+        $order->hp = $validated['hp'];
+        $order->payment = $validated['payment'];
         $order->total_price = array_sum(array_column($cart, 'total'));
         $order->save();
 
@@ -67,6 +88,7 @@ class OrderController extends Controller
 
         return redirect()->route('orders.index')->with('success', 'Order placed successfully.');
     }
+
 
     public function updateStatus(Request $request, Order $order)
     {

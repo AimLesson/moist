@@ -1,3 +1,22 @@
+            <!-- Role-based Redirection -->
+            @auth
+                @php
+                    $role = auth()->user()->role; // Assuming your User model has a 'role' attribute
+                @endphp
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var role = @json($role);
+
+                        if (role === 'admin' || role === 'owner') {
+
+                        } else {
+                            window.location.href = "{{ url('/') }}";
+                        }
+                    });
+                </script>
+            @endauth
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

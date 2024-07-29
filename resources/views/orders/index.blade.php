@@ -73,6 +73,9 @@
                         <tr>
                             <th class="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Order ID</th>
                             <th class="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Status</th>
+                            <th class="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Alamat</th>
+                            <th class="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Metode Pembayaran</th>
+                            <th class="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Nomor HP</th>
                             <th class="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Total Price</th>
                             <th class="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Order Items</th>
                         </tr>
@@ -82,6 +85,9 @@
                             <tr>
                                 <td class="py-2 px-4 text-gray-900 dark:text-white">{{ $order->id }}</td>
                                 <td class="py-2 px-4 text-gray-600 dark:text-gray-400">{{ $order->status }}</td>
+                                <td class="py-2 px-4 text-gray-600 dark:text-gray-400">{{ $order->alamat }}</td>
+                                <td class="py-2 px-4 text-gray-600 dark:text-gray-400">{{ $order->payment }}</td>
+                                <td class="py-2 px-4 text-gray-600 dark:text-gray-400">{{ $order->hp }}</td>
                                 <td class="py-2 px-4 text-gray-600 dark:text-gray-400">Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
                                 <td class="py-2 px-4 text-gray-600 dark:text-gray-400">
                                     <ul class="list-disc pl-5">

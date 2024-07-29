@@ -53,8 +53,8 @@
         @endif
 
         @php
-            $totalItems = array_sum(array_column($cart, 'quantity'));
-            $discountPercentage = min(floor($totalItems / 5) * 5, 20);
+            $totalItems = array_sum(array_column($cart, 'quantity')); //mengambil data items
+            $discountPercentage = min(floor($totalItems / 5) * 5, 20); //menghitung total qty items yang masuk ke keranjang , tiap kelipatan 5 qty menambah 5% diskon dengan maksimal diskon 20%
             $discountAmount = ($totalPrice * $discountPercentage) / 100;
             $finalPrice = $totalPrice - $discountAmount;
         @endphp

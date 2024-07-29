@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Transaksi') }}
+            {{ __('Laporan') }}
         </h2>
     </x-slot>
 
@@ -14,8 +14,11 @@
                     </div>
                 </div>
             @else
+                <!-- Include DataTables CSS -->
+                <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+                <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <table id="myTable" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
@@ -38,9 +41,6 @@
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Items
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Action
                                 </th>
                             </tr>
                         </thead>
@@ -73,14 +73,6 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td class="px-6 py-4">
-                                    @if ($order->status === 'pending')
-                                    <button class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600" onclick="updateStatus({{ $order->id }})">Mark
-                                        as Success</button>
-                                    @elseif($order->status == 'success')
-                                    <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onclick="updateStatus({{ $order->id }})">Success</button>
-                                    @endif
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -89,30 +81,32 @@
             @endif
         </div>
     </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <!-- Include DataTables Buttons Extension -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+    <!-- Initialize DataTables with Print Button -->
     <script>
-        function updateStatus(orderId) {
-            fetch(`/orders/${orderId}/status`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        status: 'success'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        document.getElementById(`status-${orderId}`).innerText = 'success';
-                        alert('Order status updated successfully.');
-                    } else {
-                        console.error('Unexpected response:', data);
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                    buttons: [
+                        'print'
+                    ],
+                language: {
+                    paginate: {
+                        next: 'Next', // or '→'
+                        previous: 'Previous' // or '←'
                     }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
+                }
+            });
+        });
     </script>
 </x-app-layout>

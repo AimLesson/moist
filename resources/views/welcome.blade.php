@@ -21,7 +21,7 @@
 
 <body>
     {{-- Navbar --}}
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <nav class="bg-white border-gray-200 dark:bg-blue-400">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <h1 class="text2xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-2xl"><span
@@ -29,7 +29,7 @@
                     Skincare</h1>
             </a>
             <button data-collapse-toggle="navbar-default" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 aria-controls="navbar-default" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -38,9 +38,32 @@
                         d="M1 1h15M1 7h15M1 13h15" />
                 </svg>
             </button>
+            <div class="flex md:order-2">
+                <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1">
+                  <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                  </svg>
+                  <span class="sr-only">Search</span>
+                </button>
+                <div class="relative hidden md:block">
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                    <span class="sr-only">Search icon</span>
+                  </div>
+                  <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
+                </div>
+                <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+              </div>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-blue-400 dark:border-gray-700">
                     <li>
                         <a href="/"
                             class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
@@ -57,10 +80,15 @@
                     </li>
                     <li>
                         @auth
-                            <a href="/"
-                                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                                {{ Auth::user()->name }}
-                            </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
                         @else
                             <a href="{{ route('login') }}"
                                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
@@ -135,7 +163,7 @@
 
         {{-- Produk Best Seller --}}
         <h1 class="text-5xl text-center font-extrabold dark:text-gray-900 mb-2">Moist<small
-                class="ms-2 font-semibold text-gray-500 dark:text-gray-400">Best Seller</small></h1>
+                class="ms-2 font-semibold text-gray-500 dark:text-gray-900">Best Seller</small></h1>
         <div class="grid gap-6 mb-6 md:grid-cols-2 lg:grid-cols-4 m-2">
             @php
                 use App\Models\Product;
@@ -181,24 +209,24 @@
         </div>
 
         {{-- About Section --}}
-        <section class="bg-white dark:bg-gray-900">
+        <section class="bg-white dark:bg-blue-400">
             <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
                 <h1
                     class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                     Moist Skincare</h1>
-                <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+                <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
                     E-Commerce Skincare terpercaya di Indonesia</p>
                 <div class="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
-                    <span class="font-semibold text-gray-400 uppercase">FEATURED IN</span>
+                    <span class="font-semibold text-gray-900 uppercase">FEATURED IN</span>
                     <div
                         class="flex flex-wrap justify-center items-center mt-8 text-gray-500 sm:justify-between featured-in">
-                        <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400">
+                        <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-900">
                             <img src="asset/kahf.png" alt="kahf">
                         </a>
-                        <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400">
+                        <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-900">
                             <img src="asset/wardah.png" alt="wardah">
                         </a>
-                        <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400">
+                        <a href="#" class="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-900">
                             <img src="asset/tokopedia.png" alt="tokopedia">
                         </a>
                     </div>
@@ -209,7 +237,7 @@
 
         {{-- Produk Terbaru --}}
         <h1 class="text-5xl text-center font-extrabold dark:text-gray-900 mb-2 mt-6">Moist<small
-                class="ms-2 font-semibold text-gray-500 dark:text-gray-400">New Product</small></h1>
+                class="ms-2 font-semibold text-gray-500 dark:text-gray-900">New Product</small></h1>
         <div class="grid gap-6 mb-6 md:grid-cols-2 lg:grid-cols-4 m-2">
             @foreach ($carousel as $pr)
                 <div class="room-card max-w-sm bg-white border border-gray-200 rounded-lg shadow">
@@ -237,7 +265,7 @@
         </div>
 
         {{-- Footer --}}
-        <footer class="bg-white dark:bg-gray-900">
+        <footer class="bg-white dark:bg-blue-400">
             <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div class="md:flex md:justify-between">
                     <div class="mb-6 md:mb-0">
@@ -251,7 +279,7 @@
                         <div>
                             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources
                             </h2>
-                            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <ul class="text-gray-500 dark:text-gray-900 font-medium">
                                 <li class="mb-4">
                                     <a href="/products" class="hover:underline">Products</a>
                                 </li>
@@ -260,7 +288,7 @@
                         <div>
                             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us
                             </h2>
-                            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <ul class="text-gray-500 dark:text-gray-900 font-medium">
                                 <li class="mb-4">
                                     <a href="https://github.com/aimlesson"
                                         class="hover:underline ">Github</a>
@@ -269,7 +297,7 @@
                         </div>
                         <div>
                             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-                            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <ul class="text-gray-500 dark:text-gray-900 font-medium">
                                 <li class="mb-4">
                                     <a href="{{ route('dashboard') }}" class="hover:underline">Administrator</a>
                                 </li>
@@ -282,8 +310,8 @@
                 </div>
                 <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div class="sm:flex sm:items-center sm:justify-between">
-                    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
-                            href="https://flowbite.com/" class="hover:underline">Moist™</a>. All Rights Reserved.
+                    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-900">© 2024 <a
+                            href="https://flowbite.com/" class="hover:underline">Moist™</a>. All Rights Reserved. || Jl. Raya Dukuhwaluh No.38, Dusun II, Dukuhwaluh, Kec. Kembaran, Kabupaten Banyumas, Jawa Tengah 53182
                     </span>
                     <div class="flex mt-4 sm:justify-center sm:mt-0">
                         <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
