@@ -1,22 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Order #{{ $order->id }}</h1>
-    <p>Status: {{ $order->status }}</p>
-    <p>Total Price: {{ $order->total_price }}</p>
-    <h2>Items</h2>
-    <ul>
-        @foreach ($order->orderItems as $item)
-            <li>
-                Product: {{ $item->product->name }}<br>
-                Quantity: {{ $item->quantity }}<br>
-                Price: {{ $item->price }}
-            </li>
-        @endforeach
-    </ul>
-    <a href="{{ route('orders.index') }}">Back to Orders</a>
+<body class="bg-gray-100 dark:bg-gray-900">
+            {{-- Navbar --}}
+            <nav class="bg-white border-gray-200 dark:bg-gray-900">
+                <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                        <h1 class="text2xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-2xl"><span
+                                class="text-transparent bg-clip-text bg-gradient-to-r to-blue-600 from-purple-400">Moist</span>
+                            Skincare</h1>
+                    </a>
+                    <button data-collapse-toggle="navbar-default" type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        aria-controls="navbar-default" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                    </button>
+                    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                        <ul
+                            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            <li>
+                                <a href="/"
+                                    class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                                    aria-current="page">Home</a>
+                            </li>
+                            <li>
+                                <a href="/katalog"
+                                    class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Products</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About
+                                    Us</a>
+                            </li>
+                            <li>
+                                @auth
+                                    <a href="/"
+                                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                        {{ Auth::user()->name }}
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}"
+                                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                        Login
+                                    </a>
+                                @endauth
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Order #{{ $order->id }}</h1>
+        <p class="text-lg text-gray-700 dark:text-gray-300">Status: {{ $order->status }}</p>
+        <p class="text-lg text-gray-700 dark:text-gray-300">Total Price: Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
+
+        <h2 class="text-2xl font-bold mt-6 mb-4 text-gray-900 dark:text-white">Items</h2>
+        <ul class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+            @foreach ($order->orderItems as $item)
+                <li class="mb-4 border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <p class="text-gray-900 dark:text-white"><span class="font-semibold">Product:</span> {{ $item->product->name }}</p>
+                    <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Quantity:</span> {{ $item->quantity }}</p>
+                    <p class="text-gray-600 dark:text-gray-400"><span class="font-semibold">Price:</span> Rp {{ number_format($item->price, 0, ',', '.') }}</p>
+                </li>
+            @endforeach
+        </ul>
+
+        <a href="{{ route('orders.index') }}" class="mt-6 inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">Back to Orders</a>
+    </div>
 </body>
 </html>
