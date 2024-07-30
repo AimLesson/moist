@@ -96,11 +96,11 @@ class OrderController extends Controller
             // Log request details for debugging
             Log::info('UpdateStatus Request:', ['request_data' => $request->all(), 'order_id' => $order->id]);
 
-            // Check if the authenticated user is allowed to update the order
-            if (Auth::id() !== $order->user_id) {
-                Log::warning('Unauthorized access attempt', ['user_id' => Auth::id(), 'order_id' => $order->id]);
-                return response()->json(['message' => 'Unauthorized access.'], 403);
-            }
+            // // Check if the authenticated user is allowed to update the order
+            // if (Auth::id() !== $order->user_id) {
+            //     Log::warning('Unauthorized access attempt', ['user_id' => Auth::id(), 'order_id' => $order->id]);
+            //     return response()->json(['message' => 'Unauthorized access.'], 403);
+            // }
 
             // Log current order status before update
             Log::info('Current order status:', ['order_id' => $order->id, 'current_status' => $order->status]);
