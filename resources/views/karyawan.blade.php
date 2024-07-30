@@ -36,38 +36,6 @@
                         </tbody>
                     </table>
                 </div>
-            @endif
         </div>
     </div>
-    <script>
-        function updateStatus(orderId) {
-            fetch(`/orders/${orderId}/status`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        status: 'success'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        document.getElementById(`status-${orderId}`).innerText = 'success';
-                        const button = document.getElementById(`button-${orderId}`);
-                        button.innerText = 'Success';
-                        button.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
-                        button.classList.add('bg-green-500', 'hover:bg-green-600');
-                        button.disabled = true;
-                        alert('Order status updated successfully.');
-                    } else {
-                        console.error('Unexpected response:', data);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-    </script>
 </x-app-layout>
