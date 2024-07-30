@@ -24,7 +24,7 @@
                     </x-nav-link>
                     @endif
                     @if (Auth::user()->role == 'owner')
-                    <x-nav-link :href="route('orders.all')" :active="request()->routeIs('orders.all')">
+                    <x-nav-link :href="route('karyawan')" :active="request()->routeIs('karyawan')">
                         {{ __('Karyawan') }}
                     </x-nav-link>
                     @endif

@@ -36,6 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('cart/{product}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
 
+    Route::get('/karyawan', function () {
+        return view('karyawan');
+    })->name('karyawan');
+
+
     // Route Orders
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/laporan', [OrderController::class, 'laporan'])->name('orders.laporan');
