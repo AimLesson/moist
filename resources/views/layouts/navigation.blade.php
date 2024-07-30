@@ -18,9 +18,16 @@
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
                         {{ __('Product') }}
                     </x-nav-link>
+                    @if (Auth::user()->role == 'admin')
                     <x-nav-link :href="route('orders.all')" :active="request()->routeIs('orders.all')">
                         {{ __('Transaksi') }}
                     </x-nav-link>
+                    @endif
+                    @if (Auth::user()->role == 'owner')
+                    <x-nav-link :href="route('orders.all')" :active="request()->routeIs('orders.all')">
+                        {{ __('Karyawan') }}
+                    </x-nav-link>
+                    @endif
                     {{-- @if (Auth::user()->role == 'owner') --}}
                     <x-nav-link :href="route('orders.laporan')" :active="request()->routeIs('orders.laporan')">
                         {{ __('Laporan') }}
