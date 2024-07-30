@@ -75,10 +75,10 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($order->status === 'pending')
-                                    <button class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600" onclick="updateStatus({{ $order->id }})">Mark
+                                    <button id="button-{{ $order->id }}" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600" onclick="updateStatus({{ $order->id }})">Mark
                                         as Success</button>
                                     @elseif($order->status == 'success')
-                                    <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" onclick="updateStatus({{ $order->id }})">Success</button>
+                                    <button id="button-{{ $order->id }}" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" disabled>Success</button>
                                     @endif
                                 </td>
                             </tr>
@@ -105,6 +105,11 @@
                 .then(data => {
                     if (data.message) {
                         document.getElementById(`status-${orderId}`).innerText = 'success';
+                        const button = document.getElementById(`button-${orderId}`);
+                        button.innerText = 'Success';
+                        button.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+                        button.classList.add('bg-green-500', 'hover:bg-green-600');
+                        button.disabled = true;
                         alert('Order status updated successfully.');
                     } else {
                         console.error('Unexpected response:', data);
