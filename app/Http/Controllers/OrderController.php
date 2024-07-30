@@ -94,23 +94,34 @@ class OrderController extends Controller
     {
         try {
             // Log request details for debugging
-            Log::info('UpdateStatus Request:', $request->all());
+            Log::info('UpdateStatus Request:', ['request_data' => $request->all(), 'order_id' => $order->id]);
 
             // Check if the authenticated user is allowed to update the order
             if (Auth::id() !== $order->user_id) {
+                Log::warning('Unauthorized access attempt', ['user_id' => Auth::id(), 'order_id' => $order->id]);
                 return response()->json(['message' => 'Unauthorized access.'], 403);
             }
 
+            // Log current order status before update
+            Log::info('Current order status:', ['order_id' => $order->id, 'current_status' => $order->status]);
+
+            // Update the order status
             $order->status = 'success';
             $order->save();
 
-            Log::info('Order status updated successfully:', ['order_id' => $order->id]);
-
-            return response()->json(['message' => 'Order status updated successfully.']);
+            // Verify the status was updated
+            if ($order->wasChanged('status')) {
+                Log::info('Order status updated successfully:', ['order_id' => $order->id, 'new_status' => $order->status]);
+                return response()->json(['message' => 'Order status updated successfully.']);
+            } else {
+                Log::error('Order status update failed:', ['order_id' => $order->id]);
+                return response()->json(['message' => 'Order status update failed.'], 500);
+            }
         } catch (\Exception $e) {
-            Log::error('Error updating order status:', ['error' => $e->getMessage()]);
+            Log::error('Error updating order status:', ['error' => $e->getMessage(), 'order_id' => $order->id]);
 
             return response()->json(['message' => 'Error updating order status.'], 500);
         }
     }
+
 }
