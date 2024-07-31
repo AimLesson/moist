@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth; // Make sure to include this
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth; // Make sure to include this
 
 class OrderController extends Controller
 {
@@ -18,7 +19,46 @@ class OrderController extends Controller
                        ->where('user_id', $userId) // Filter orders by the logged-in user's ID
                        ->get();
 
-        return view('orders.index', compact('orders'));
+        // Prepare data for the chart
+        $monthlySales = Order::select(
+            DB::raw('MONTH(created_at) as month'),
+            DB::raw('SUM(total_price) as total')
+        )
+        ->where('user_id', $userId)
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+
+        // Prepare data arrays for chart
+        $months = $monthlySales->pluck('month')->toArray();
+        $totals = $monthlySales->pluck('total')->toArray();
+
+        return view('orders.index', compact('orders', 'months', 'totals'));
+    }
+
+    public function indexdashboard()
+    {
+        $userId = Auth::id(); // Get the currently logged-in user's ID
+
+        $orders = Order::with('orderItems.product')
+                       ->where('user_id', $userId) // Filter orders by the logged-in user's ID
+                       ->get();
+
+        // Prepare data for the chart
+        $monthlySales = Order::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('SUM(total_price) as total')
+        )
+        ->where('user_id', $userId)
+        ->groupBy('date')
+        ->orderBy('date')
+        ->get();
+
+        // Prepare data arrays for chart
+        $dates = $monthlySales->pluck('date')->toArray();
+        $totals = $monthlySales->pluck('total')->toArray();
+
+        return view('dashboard', compact('orders', 'dates', 'totals'));
     }
 
     public function indexall()
