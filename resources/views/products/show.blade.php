@@ -5,6 +5,13 @@
     <title>Products</title>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -61,26 +68,40 @@
         </div>
     </nav>
 
-    <div class="room-card max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-        <a href="#">
-            <img class="rounded-t-lg" src="{{ asset('storage/' . $product->image) }}"
-                alt="{{ $product->name }}" />
-        </a>
-        <div class="p-5">
-            <a href="#">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $product->name }}
-                </h5>
-            </a>
-            <p class="mb-3 font-normal text-gray-700">{{ $product->description}}</p>
-            <p class="mb-3 font-normal text-gray-700">Harga : Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-            <a class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" href="{{ route('products.katalog') }}">Back to Products</a>
-            <form action="{{ route('cart.store') }}" method="POST" style="display:inline;">
-                @csrf
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <button type="submit"
-                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Add
-                    to Cart</button>
-            </form>
+    <!-- Product Showcase -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0">
+            <!-- Product Image -->
+            <div class="md:w-1/2">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-lg">
+                    <img class="w-full h-64 object-cover" src="{{ asset('storage/' . $product->image) }}"
+                        alt="{{ $product->name }}" />
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="md:w-1/2">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-lg">
+                    <h2 class="text-3xl font-semibold text-gray-900 dark:text-white mb-4">{{ $product->name }}</h2>
+                    <p class="mb-4 text-gray-700 dark:text-gray-300">{{ $product->description }}</p>
+                    <p class="mb-6 text-lg font-medium text-gray-900 dark:text-white">Harga: Rp
+                        {{ number_format($product->price, 0, ',', '.') }}</p>
+                    <div class="flex space-x-4">
+                        <a href="{{ route('products.katalog') }}"
+                            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-red-600 to-red-700 shadow-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-red-900">
+                            Back to Products
+                        </a>
+                        <form action="{{ route('cart.store') }}" method="POST" style="display:inline;">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit"
+                                class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-blue-900">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -15,6 +15,7 @@
         <link href="https://cdn.datatables.net/2.1.2/js/dataTables.min.js" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
 
         <!-- Scripts -->
