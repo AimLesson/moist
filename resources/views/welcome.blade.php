@@ -39,28 +39,40 @@
                 </svg>
             </button>
             <div class="flex md:order-2">
-                <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1">
-                  <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                  </svg>
-                  <span class="sr-only">Search</span>
+                <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
+                    aria-expanded="false"
+                    class="md:hidden text-gray-500 dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
                 </button>
                 <div class="relative hidden md:block">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                    <span class="sr-only">Search icon</span>
-                  </div>
-                  <input type="text" id="search-navbar" class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search...">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-900" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                        <span class="sr-only">Search icon</span>
+                    </div>
+                    <input type="text" id="search-navbar"
+                        class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search...">
                 </div>
-                <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
+                <button data-collapse-toggle="navbar-search" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-search" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
                     </svg>
                 </button>
-              </div>
+            </div>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul
                     class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-blue-400 dark:border-gray-700">
@@ -80,15 +92,15 @@
                     </li>
                     <li>
                         @auth
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                                <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
                         @else
                             <a href="{{ route('login') }}"
                                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
@@ -108,57 +120,56 @@
             $carousel = \App\Models\Product::orderBy('created_at', 'desc')->take(4)->get();
         @endphp
         {{-- carousel --}}
-<div id="default-carousel" class="relative w-full h-auto mb-6 mt-6" data-carousel="slide">
-    <!-- Carousel wrapper -->
-    <div class="relative h-90 overflow-hidden rounded-lg md:h-[32rem]">
-        @foreach ($carousels as $index => $r)
-            <div class="hidden duration-700 ease-in-out {{ $index === 0 ? 'block' : '' }}" data-carousel-item>
-                <a href="#">
-                    <img src="{{ asset('banner/' . $r->image) }}"
-                        class="mx-auto w-full h-full object-contain"
-                        alt="">
-                </a>
+        <div id="default-carousel" class="relative w-full h-auto mb-6 mt-6" data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative h-90 overflow-hidden rounded-lg md:h-[32rem]">
+                @foreach ($carousels as $index => $r)
+                    <div class="hidden duration-700 ease-in-out {{ $index === 0 ? 'block' : '' }}" data-carousel-item>
+                        <a href="#">
+                            <img src="{{ asset('banner/' . $r->image) }}" class="mx-auto w-full h-full object-contain"
+                                alt="">
+                        </a>
+                    </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
 
-    <!-- Slider indicators -->
-    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        @foreach ($carousels as $index => $r)
-            <button type="button" class="w-3 h-3 rounded-full"
-                aria-current="{{ $index === 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}"
-                data-carousel-slide-to="{{ $index }}"></button>
-        @endforeach
-    </div>
+            <!-- Slider indicators -->
+            <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                @foreach ($carousels as $index => $r)
+                    <button type="button" class="w-3 h-3 rounded-full"
+                        aria-current="{{ $index === 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}"
+                        data-carousel-slide-to="{{ $index }}"></button>
+                @endforeach
+            </div>
 
-    <!-- Slider controls -->
-    <button type="button"
-        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        data-carousel-prev>
-        <span
-            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
-            <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M5 1 1 5l4 4" />
-            </svg>
-            <span class="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button"
-        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-        data-carousel-next>
-        <span
-            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
-            <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="m1 9 4-4-4-4" />
-            </svg>
-            <span class="sr-only">Next</span>
-        </span>
-    </button>
-</div>
+            <!-- Slider controls -->
+            <button type="button"
+                class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-prev>
+                <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 1 1 5l4 4" />
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button"
+                class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-next>
+                <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 9 4-4-4-4" />
+                    </svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
+        </div>
 
 
         {{-- Produk Best Seller --}}
@@ -214,9 +225,41 @@
                 <h1
                     class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                     Moist Skincare</h1>
-                <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
-                    E-Commerce Skincare terpercaya di Indonesia</p>
-                <div class="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
+                <p class="mb-8 text-lg font-extrabold text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
+                    Tentang Kami</p>
+                <p class="mb-8 text-md font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
+                    Selamat datang di MOIST SKINCARE, pusat belanja Anda untuk berbagai produk skincare dan kosmetik
+                    dari banyak brand ternama. Kami bangga menjadi destinasi utama bagi para pecinta kecantikan yang
+                    mencari produk berkualitas untuk perawatan kulit dan kecantikan.</p>
+                <p class="mb-8 text-lg font-extrabold text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
+                    Misi Kami
+                </p>
+                <p class="mb-8 text-md font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
+                    Di MOIST SKINCARE, misi kami adalah menyediakan berbagai pilihan produk skincare dan kosmetik dari
+                    brand-brand terbaik di dunia. Kami berkomitmen untuk membantu Anda menemukan produk yang sesuai
+                    dengan kebutuhan dan jenis kulit Anda, sehingga Anda dapat merasa percaya diri dan tampil memukau
+                    setiap hari.</p>
+                <p class="mb-8 text-lg font-extrabold text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
+                    Kenapa Memilih Kami?
+                </p>
+                <p class="mb-8 text-md font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-900">
+                    Ragam Brand Terbaik: Kami menawarkan produk dari berbagai brand ternama yang telah teruji
+                    kualitasnya. Mulai dari brand lokal hingga internasional, kami memastikan Anda mendapatkan yang
+                    terbaik.
+                    Produk Asli dan Terjamin: Semua produk yang kami jual adalah 100% asli dan terjamin keasliannya.
+                    Kami bekerja sama langsung dengan distributor resmi untuk memastikan Anda mendapatkan produk yang
+                    aman dan berkualitas.
+                    Layanan Pelanggan Terbaik: Kepuasan pelanggan adalah prioritas kami. Tim kami siap membantu Anda
+                    dengan saran produk yang tepat dan layanan pelanggan yang ramah dan profesional.
+                    Harga Kompetitif: Kami menawarkan harga yang kompetitif untuk semua produk kami. Kami percaya bahwa
+                    perawatan kulit berkualitas tidak harus mahal, dan kami berusaha untuk menyediakan produk terbaik
+                    dengan harga yang terjangkau.
+                    Produk Kami
+
+                    MOIST SKINCARE menawarkan berbagai produk mulai dari pembersih wajah, serum, pelembap, masker,
+                    hingga makeup seperti foundation, lipstik, dan banyak lagi. Kami menyediakan produk untuk semua
+                    jenis kulit dan kebutuhan, sehingga Anda dapat menemukan yang paling sesuai dengan Anda.p>
+                    {{-- <div class="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
                     <span class="font-semibold text-gray-900 uppercase">FEATURED IN</span>
                     <div
                         class="flex flex-wrap justify-center items-center mt-8 text-gray-500 sm:justify-between featured-in">
@@ -230,7 +273,7 @@
                             <img src="asset/tokopedia.png" alt="tokopedia">
                         </a>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </section>
@@ -270,9 +313,11 @@
                 <div class="md:flex md:justify-between">
                     <div class="mb-6 md:mb-0">
                         <a href="https://flowbite.com/" class="flex items-center">
-                            <h1 class="text2xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-2xl"><span
-                                class="text-transparent bg-clip-text bg-gradient-to-r to-blue-600 from-purple-400">Moist</span>
-                            Skincare</h1>
+                            <h1 class="text2xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-2xl">
+                                <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r to-blue-600 from-purple-400">Moist</span>
+                                Skincare
+                            </h1>
                         </a>
                     </div>
                     <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -290,8 +335,7 @@
                             </h2>
                             <ul class="text-gray-500 dark:text-gray-900 font-medium">
                                 <li class="mb-4">
-                                    <a href="https://github.com/aimlesson"
-                                        class="hover:underline ">Github</a>
+                                    <a href="https://github.com/aimlesson" class="hover:underline ">Github</a>
                                 </li>
                             </ul>
                         </div>
@@ -311,7 +355,9 @@
                 <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div class="sm:flex sm:items-center sm:justify-between">
                     <span class="text-sm text-gray-500 sm:text-center dark:text-gray-900">© 2024 <a
-                            href="https://flowbite.com/" class="hover:underline">Moist™</a>. All Rights Reserved. || Jl. Raya Dukuhwaluh No.38, Dusun II, Dukuhwaluh, Kec. Kembaran, Kabupaten Banyumas, Jawa Tengah 53182
+                            href="https://flowbite.com/" class="hover:underline">Moist™</a>. All Rights Reserved. ||
+                        Jl. Raya Dukuhwaluh No.38, Dusun II, Dukuhwaluh, Kec. Kembaran, Kabupaten Banyumas,
+                        Jawa Tengah 53182
                     </span>
                     <div class="flex mt-4 sm:justify-center sm:mt-0">
                         <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
